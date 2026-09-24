@@ -1,8 +1,8 @@
 # Personal Task Manager
 
 Project Code: WST21-PM-2026-SF
-Student Name:
-Course & Year:
+Student Name: John Rusvic F. Auditor
+Course & Year: BSIT 2nd year
 Database Used: MySQL
 
 ## Features
