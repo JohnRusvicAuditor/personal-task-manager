@@ -3,6 +3,21 @@
 @section('title', 'All Tasks')
 
 @section('content')
+    <div class="stats">
+        <div class="stat-card total">
+            <div class="label">Total Tasks</div>
+            <div class="value">{{ $tasks->count() }}</div>
+        </div>
+        <div class="stat-card pending">
+            <div class="label">Pending</div>
+            <div class="value">{{ $tasks->where('status', 'Pending')->count() }}</div>
+        </div>
+        <div class="stat-card completed">
+            <div class="label">Completed</div>
+            <div class="value">{{ $tasks->where('status', 'Completed')->count() }}</div>
+        </div>
+    </div>
+
     <div class="card">
         <div class="top-bar">
             <h1>My Tasks</h1>

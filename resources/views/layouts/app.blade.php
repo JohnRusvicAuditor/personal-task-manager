@@ -5,132 +5,179 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Personal Task Manager')</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
-            --bg: #f5f6fa;
-            --card: #ffffff;
-            --text: #1a1d29;
-            --text-muted: #6b7280;
-            --border: #e5e7eb;
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --primary-light: #eef2ff;
-            --success: #10b981;
-            --success-light: #d1fae5;
-            --warning: #f59e0b;
-            --warning-light: #fef3c7;
-            --danger: #ef4444;
-            --danger-light: #fee2e2;
-            --purple: #8b5cf6;
-            --purple-light: #ede9fe;
-            --radius: 12px;
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
-            --shadow: 0 4px 12px rgba(0,0,0,0.06);
-            --shadow-lg: 0 10px 30px rgba(0,0,0,0.08);
+            --bg-deep: #0a0118;
+            --bg-mid: #150a2e;
+            --card: #1a0f38;
+            --card-border: #3d2a6b;
+            --text: #f0eaff;
+            --text-muted: #a89ecb;
+            --neon-pink: #ff2ea6;
+            --neon-purple: #9d4edd;
+            --neon-cyan: #00f0ff;
+            --neon-green: #39ff88;
+            --neon-orange: #ff8c42;
+            --radius: 14px;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg);
+            font-family: 'Rajdhani', sans-serif;
             color: var(--text);
             min-height: 100vh;
+            background:
+                linear-gradient(rgba(10,1,24,0.55), rgba(10,1,24,0.75)),
+                repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(157,78,221,0.18) 40px),
+                repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(157,78,221,0.18) 40px),
+                radial-gradient(circle at 15% 15%, rgba(255,46,166,0.35), transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(0,240,255,0.25), transparent 45%),
+                linear-gradient(180deg, var(--bg-deep), var(--bg-mid));
+            background-attachment: fixed;
         }
 
-        nav {
-            background: var(--card);
-            padding: 18px 32px;
+        header.top {
+            background: rgba(21,10,46,0.7);
+            backdrop-filter: blur(8px);
+            padding: 22px 40px;
+            border-bottom: 1px solid var(--neon-purple);
+            box-shadow: 0 2px 24px rgba(157,78,221,0.35);
+        }
+
+        header.top .row {
+            max-width: 1000px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 10;
         }
 
-        nav .brand {
-            color: var(--text);
-            text-decoration: none;
-            font-weight: 800;
-            font-size: 1.25rem;
+        header.top .brand {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.3rem;
+            letter-spacing: 0.05em;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px rgba(0,240,255,0.7), 0 0 20px rgba(0,240,255,0.4);
             display: flex;
             align-items: center;
-            gap: 8px;
-            letter-spacing: -0.02em;
+            gap: 10px;
         }
 
-        nav a.nav-add {
-            background: var(--primary);
+        header.top a.nav-add {
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
             color: #fff;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            padding: 10px 18px;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            padding: 12px 22px;
             border-radius: 8px;
-            transition: background 0.15s ease, transform 0.15s ease;
+            text-transform: uppercase;
+            box-shadow: 0 0 16px rgba(255,46,166,0.5);
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
         }
 
-        nav a.nav-add:hover {
-            background: var(--primary-dark);
-            transform: translateY(-1px);
+        header.top a.nav-add:hover {
+            box-shadow: 0 0 26px rgba(255,46,166,0.85);
+            transform: translateY(-2px);
         }
 
         .container {
-            max-width: 960px;
+            max-width: 1000px;
             margin: 40px auto;
             padding: 0 24px;
         }
 
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 22px 24px;
+            border: 1px solid var(--card-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+        }
+
+        .stat-card.total::before { background: var(--neon-cyan); box-shadow: 0 0 10px var(--neon-cyan); }
+        .stat-card.pending::before { background: var(--neon-orange); box-shadow: 0 0 10px var(--neon-orange); }
+        .stat-card.completed::before { background: var(--neon-green); box-shadow: 0 0 10px var(--neon-green); }
+
+        .stat-card .label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+        }
+
+        .stat-card.total .value { color: var(--neon-cyan); text-shadow: 0 0 12px rgba(0,240,255,0.6); }
+        .stat-card.pending .value { color: var(--neon-orange); text-shadow: 0 0 12px rgba(255,140,66,0.6); }
+        .stat-card.completed .value { color: var(--neon-green); text-shadow: 0 0 12px rgba(57,255,136,0.6); }
+
         .card {
             background: var(--card);
             border-radius: var(--radius);
-            box-shadow: var(--shadow);
             padding: 32px;
             margin-bottom: 24px;
-            border: 1px solid var(--border);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 0 40px rgba(157,78,221,0.15);
         }
 
         h1 {
-            font-size: 1.75rem;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            margin: 0;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            color: var(--text);
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+        table { width: 100%; border-collapse: collapse; }
 
         th, td {
             text-align: left;
             padding: 16px 12px;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid var(--card-border);
             vertical-align: middle;
         }
 
         th {
-            color: var(--text-muted);
-            font-size: 0.75rem;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-purple);
+            font-size: 0.68rem;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
             font-weight: 700;
         }
 
-        tbody tr {
-            transition: background 0.12s ease;
-        }
-
-        tbody tr:hover {
-            background: #fafafb;
-        }
-
-        tbody tr:last-child td {
-            border-bottom: none;
-        }
+        tbody tr { transition: background 0.15s ease; }
+        tbody tr:hover { background: rgba(157,78,221,0.1); }
+        tbody tr:last-child td { border-bottom: none; }
+        td strong { color: var(--text); font-weight: 600; }
 
         .badge {
             display: inline-flex;
@@ -138,109 +185,120 @@
             gap: 6px;
             padding: 6px 14px;
             border-radius: 999px;
-            font-size: 0.78rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.68rem;
             font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
         }
 
-        .badge::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-        }
+        .badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; }
 
         .badge-pending {
-            background: var(--warning-light);
-            color: #92400e;
+            background: rgba(255,140,66,0.15);
+            color: var(--neon-orange);
+            border: 1px solid rgba(255,140,66,0.4);
         }
-        .badge-pending::before { background: var(--warning); }
+        .badge-pending::before { background: var(--neon-orange); box-shadow: 0 0 6px var(--neon-orange); }
 
         .badge-completed {
-            background: var(--success-light);
-            color: #065f46;
+            background: rgba(57,255,136,0.15);
+            color: var(--neon-green);
+            border: 1px solid rgba(57,255,136,0.4);
         }
-        .badge-completed::before { background: var(--success); }
+        .badge-completed::before { background: var(--neon-green); box-shadow: 0 0 6px var(--neon-green); }
 
         .btn {
             display: inline-block;
             padding: 8px 16px;
             border-radius: 8px;
             border: none;
-            font-size: 0.82rem;
-            font-weight: 600;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
             cursor: pointer;
             text-decoration: none;
             color: #fff;
-            transition: opacity 0.15s ease, transform 0.15s ease;
+            transition: opacity 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
         }
 
-        .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+        .btn:hover { transform: translateY(-1px); }
 
-        .btn-primary { background: var(--primary); }
-        .btn-edit { background: var(--warning); color: #78350f; }
-        .btn-delete { background: var(--danger-light); color: #991b1b; }
-        .btn-toggle { background: var(--purple-light); color: #5b21b6; }
+        .btn-primary { background: var(--neon-cyan); color: #0a0118; }
+        .btn-primary:hover { box-shadow: 0 0 14px rgba(0,240,255,0.6); }
+
+        .btn-edit { background: var(--neon-orange); color: #2a1000; }
+        .btn-edit:hover { box-shadow: 0 0 14px rgba(255,140,66,0.6); }
+
+        .btn-delete { background: rgba(255,46,166,0.2); color: var(--neon-pink); border: 1px solid var(--neon-pink); }
+        .btn-delete:hover { box-shadow: 0 0 14px rgba(255,46,166,0.5); }
+
+        .btn-toggle { background: rgba(157,78,221,0.25); color: #d8b4fe; border: 1px solid var(--neon-purple); }
+        .btn-toggle:hover { box-shadow: 0 0 14px rgba(157,78,221,0.5); }
 
         .btn-add {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
             padding: 12px 22px;
-            font-size: 0.95rem;
-            border-radius: 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            border-radius: 8px;
         }
 
-        .actions {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
+        .actions { display: flex; gap: 8px; flex-wrap: wrap; }
         .actions form { display: inline-block; }
 
         input[type=text], textarea, select, input[type=date] {
             width: 100%;
             padding: 12px 14px;
             margin-bottom: 20px;
-            border: 1.5px solid var(--border);
+            border: 1.5px solid var(--card-border);
             border-radius: 8px;
             font-size: 0.95rem;
-            font-family: inherit;
+            font-family: 'Rajdhani', sans-serif;
             color: var(--text);
-            background: var(--card);
+            background: rgba(10,1,24,0.5);
             transition: border-color 0.15s ease, box-shadow 0.15s ease;
         }
 
         input:focus, textarea:focus, select:focus {
             outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px var(--primary-light);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 0 3px rgba(0,240,255,0.2);
         }
 
+        select option { background: var(--card); color: var(--text); }
+
         label {
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.85rem;
-            color: var(--text);
             margin-bottom: 8px;
             display: block;
+            color: var(--neon-purple);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
         }
 
         .alert {
-            background: var(--success-light);
-            color: #065f46;
+            background: rgba(57,255,136,0.12);
+            color: var(--neon-green);
             padding: 14px 18px;
             border-radius: var(--radius);
             margin-bottom: 20px;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 0.9rem;
-            border: 1px solid #a7f3d0;
+            border: 1px solid rgba(57,255,136,0.4);
         }
 
         .error-list {
-            background: var(--danger-light);
-            color: #991b1b;
+            background: rgba(255,46,166,0.12);
+            color: var(--neon-pink);
             padding: 14px 18px;
             border-radius: var(--radius);
             margin-bottom: 20px;
-            border: 1px solid #fecaca;
+            border: 1px solid rgba(255,46,166,0.4);
         }
 
         .empty-state {
@@ -259,10 +317,14 @@
     </style>
 </head>
 <body>
-    <nav>
-        <a href="{{ route('tasks.index') }}" class="brand">📝 Personal Task Manager</a>
-        <a href="{{ route('tasks.create') }}" class="nav-add">+ Add Task</a>
-    </nav>
+    <header class="top">
+        <div class="row">
+            <div class="brand">
+                ⚡ Personal Task
+            </div>
+            <a href="{{ route('tasks.create') }}" class="nav-add">+ New Task</a>
+        </div>
+    </header>
 
     <div class="container">
         @if (session('success'))

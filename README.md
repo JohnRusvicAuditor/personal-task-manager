@@ -25,7 +25,24 @@ Database Used: MySQL
 3. Configure your `.env` database credentials (MySQL by default).
 4. Run migrations: `php artisan migrate`
 5. Start the server: `php artisan serve`
-6. Visit `http://127.0.0.1:8000`
+6. Visit: https://expert-invention-q565prvp7673xgpj-8000.app.github.dev/tasks
 
 ## Screenshots
-_Add your own screenshots here once the app is running (task list, add form, edit form)._
+
+- Homepage 
+![HOMEPAGE](Homepage.png)
+
+- Add Task
+![ADD TASK](ADDTASK.png)
+
+- View Tasks
+![VIEW TASK](VIEWTASK.png)
+
+- Edit Task
+![EDIT TASK](EDITTASK.png)
+
+- Update Status
+![UPDATE TASK](UPDATE.png)
+
+- Delete Task
+![DELETE TASK](DELETE.png)
