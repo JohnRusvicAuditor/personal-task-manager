@@ -28,4 +28,24 @@ Database Used: MySQL
 6. Visit `http://127.0.0.1:8000`
 
 ## Screenshots
-_Add your own screenshots here once the app is running (task list, add form, edit form)._
+
+HOMEPAGE:
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/cc3c5db1-57e2-4032-a33b-3e4bc208fcac" />
+
+ADD TASK:
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4b92a2eb-9dc0-4fa0-928b-f60f0b867f22" />
+
+VIEW TASK:
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/fbf10326-a2f9-448e-980f-2bcce80cc838" />
+
+EDIT TASK:
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/45b7b047-1538-4ef1-b5f2-3fe258a3b51f" />
+
+DELETE TASK:
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6de5981f-d022-4970-8930-2cdc7ae6aea6" />
+
+UPDATE STATUS:
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/f3cfb262-10b4-405c-94e8-94ebcf759516" />
+
+
+
